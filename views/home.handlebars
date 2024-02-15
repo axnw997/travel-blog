@@ -1,0 +1,161 @@
+{{!-- ======sarah code start index.html & main.css added to css folder========= --}}
+<div class="blog-card">
+    <section class="blog-filter-container">
+        <div class="blog-filter">
+            <div class="search-box-container">
+                <input type="text" class="search-input" placeholder="Search Article / Author">
+                <button class="search-btn">
+                    <svg class="feather feather-search" fill="none" height="24" stroke="currentColor"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" x2="16.65" y1="21" y2="16.65" />
+                    </svg>
+                </button>
+            </div>
+
+            <select class="sort-by-selection">
+                <option value="">Sort By</option>
+                <option value="upload-time">Upload Time</option>
+                <option value="popularity">Popularity</option>
+            </select>
+        </div>
+    </section>
+</div>
+{{!-- ======sarah code end========= --}}
+
+<main id="main">
+    {{#each data}}
+    <div class="blog-cards">
+        <section class="article-section">
+            <h1>{{this.title}}</h1>
+            <div id="date-time">Publish: {{this.blog_date}} {{this.blog_time}}</div>
+            <img class="blog-img" src="{{this.img_link}}" alt="Article Image">
+            <div id="main-content">
+                {{{this.article}}}
+            </div>
+            <button id="like-button">Like</button>
+        </section>
+
+        <aside class="author-section">
+            <h2>Author</h2>
+            <img src="{{this.avatar_link}}" alt="Author Avatar">
+            <a href="#">{{this.username}}</a>
+            <p>{{this.description}}</p>
+            <ul>
+                {{#each author.otherArticles}}
+                <li><a href="{{this.link}}">{{this.title}}</a></li>
+                {{/each}}
+            </ul>
+        </aside>
+
+        <section class="comments-section">
+            <h2>Comments</h2>
+            {{#each this.comments}}
+            <div class="comment">
+                <img src="{{this.avatar_link}}" alt="Commenter Avatar">
+                <div>{{this.text}}</div>
+                <div class="comment-time">{{this.date}}</div>
+            </div>
+            {{/each}}
+
+        </section>
+    </div>
+
+    {{/each}}
+
+</main>
+
+<!-- Pagination buttons -->
+<div id="pagination">
+    <button id="prev-page">Previous</button>
+
+    <!-- Page Numbers -->
+    <div id="page-numbers">
+        {{#each pageNumbers}}
+        <button class="page-number" data-page="{{this}}">{{this}}</button>
+        {{/each}}
+    </div>
+
+    <button id="next-page">Next</button>
+</div>
+
+<style>
+   /* CSS for blog cards */
+.blog-cards {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #ccc; /* Optional: Border around each blog card */
+  margin-bottom: 20px; /* Add margin between blog cards */
+  background-color: #881ad3;
+}
+
+.blog-image {
+  width: 100%; /* Set initial width of the image */
+}
+
+/* Style article section */
+.article-section {
+  width: 60%; /* Adjust the width as needed */
+  padding: 20px;
+}
+
+.article-section h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#date-time {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+#main-content {
+  margin-bottom: 10px;
+}
+
+/* Style author section */
+.author-section {
+  width: 30%; /* Adjust the width as needed */
+  padding: 20px;
+}
+
+.author-section img {
+  width: 100px; /* Set author avatar width */
+  height: 100px; /* Set author avatar height */
+  border-radius: 50%; /* Make the avatar round */
+  margin-bottom: 10px;
+}
+
+.author-section a {
+  text-decoration: none;
+  color: blue;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* Style comments section */
+.comments-section {
+  padding: 20px;
+}
+
+.comments-section h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.comment {
+  border-bottom: 1px solid #ccc; /* Optional: Add a border between comments */
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.comment img {
+  width: 50px; /* Set comment avatar width */
+  height: 50px; /* Set comment avatar height */
+  border-radius: 50%; /* Make the avatar round */
+  margin-right: 10px;
+}
+
+  </style>
+

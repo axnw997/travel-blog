@@ -1,0 +1,84 @@
+<head>
+  <script src="/js/dashboard-article.js"></script>
+</head>
+<div class="container">
+  <p>this is dashboard page</p>
+  <h1>Hello, {{user.name}}!</h1>
+  <p>Click <a href="./logout">here</a> to log out.</p>
+</div>
+
+<header>
+</header>
+
+<!-- Main Content -->
+<div class="main-content">
+
+
+  <!-- Sidebar -->
+
+  <aside class="sidebar">
+    <h2>Personal Home Page</h2>
+    <ul>
+      <li><a href="/updateProfile">Edit Profile</a></li>
+      {{!-- <li><a href="">My Blog Posts</a></li> --}}
+      {{!-- <li><a href="#mylike">My Like</a></li> --}}
+      {{!-- <li><a href="#myalbum">My Album</a></li> --}}
+      <li><a href="/createBlog">Creat A Blog</a></li>
+    </ul>
+  </aside>
+  <!--Profile Section And Articles Section -->
+  <div class="profile-and-articles">
+    <!-- Profile Section -->
+    <section class="profile">
+      <div class="avatar-container">
+        <img src="{{user.avatar_link}}" alt="{{user.name}}">
+      </div>
+      <div class="user-info">
+        <h3>{{user.name}}</h3>
+        <p>{{user.description}}</p>
+      </div>
+    </section>
+
+    <!-- Articles Section -->
+    {{!-- list of all articles that authored by current user --}}
+    <p id="deleteMessage"></p>
+
+    <p>My Blogs:</p>
+    <section class="articles">
+      <ul>
+        {{#each articles}}
+        <li>
+          <a href="getArticle/{{this.id}}">{{this.title}}</a>
+          <button class="display-article">Display Content</button>
+          <a href="/editBlog/{{this.id}}"><button class="edit-article">Edit</button></a>
+          <button class="delete-article">Delete</button>
+          <div id="article-container blog_{{this.id}}"></div>
+        </li>
+        {{/each}}
+      </ul>
+    </section>
+  </div>
+
+
+  <!-- Personal Data and You May Also Like -->
+  <div class="data-and-like">
+
+    <!-- Personal Data -->
+    <aside class="personal-data">
+      <p>Articles Published: {{articles.length}}</p>
+      <p>Photos Uploaded: {{photos_count}}</p>
+      <p>Likes Received: {{likes_received}}</p>
+      <p>Joined: {{registration_date}}</p>
+    </aside>
+
+    <!-- You May Also Like -->
+    <section class="you-may-also-like">
+      <h2>You May Also Like</h2>
+      {{#each other_articles}}
+      <div>
+        <a href="{{this.url}}">{{this.title}}</a>
+      </div>
+      {{/each}}
+    </section>
+  </div>
+</div>
